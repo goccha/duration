@@ -1,0 +1,24 @@
+name: Test go-licenses
+
+on:
+  push:
+    branches:
+      - 'develop'
+      - 'main'
+    paths:
+      - '**.mod'
+  workflow_dispatch:
+
+jobs:
+  go-licenses-check:
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Check OSS Licenses
+        uses: goccha/go-licenses-action@v0.0.1
+        with:
+          ignore: golang.org/x
