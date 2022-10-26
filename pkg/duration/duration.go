@@ -14,16 +14,11 @@ func Parse(duration string) time.Duration {
 
 func Add(t time.Time, duration string) time.Time {
 	duration = strings.ToUpper(duration)
-	for i, r := range duration {
-		switch r {
-		case 'P':
-			_, t = addDate(duration[i+1:], t)
-		case 'T':
-			_, t = addTime(duration[i+1:], t)
-		default:
-			return t
-		}
-		break
+	switch duration[0] {
+	case 'P':
+		_, t = addDate(duration[1:], t)
+	case 'T':
+		_, t = addTime(duration[1:], t)
 	}
 	return t
 }
